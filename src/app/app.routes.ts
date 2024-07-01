@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
-import { BooksHomeComponent } from './components/books-home/books-home.component';
+import { MainComponent } from './components/main/main.component';
+import { bookResolver } from './resolvers/book.resolver';
 
 export const routes: Routes = [
     {
         path:'',
-        component:BooksHomeComponent
+        component:MainComponent,
+        resolve:{books:bookResolver}
     }
 ];

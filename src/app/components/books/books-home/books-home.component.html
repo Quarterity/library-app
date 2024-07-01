@@ -1,0 +1,8 @@
+<div class="books-header h-12 mb-1 flex justify-center">
+    <div class="books-header-content flex justify-between pb-2">
+        <!-- TODO: Add header content and submit btn -->
+        <app-search class="search-section flex self-center"></app-search>
+    </div>
+</div>
+<app-books-list [booksList]="books" (titleClick)="openModal($event)"></app-books-list>
+<app-book-details-modal  *ngIf="selectedBook!=null" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>
