@@ -3,4 +3,4 @@
     </div>
     <h2 (click)="openModal(book)"  class="mt-3 text-sm text-center text-gray-700 font-thin" [ngClass]="{'cursor-pointer hover:underline':isModalAvailable}">{{book.title}}</h2>
     <p class="text-sm text-center text-gray-700 font-thin">{{book.author}}, {{book.publication_year}}</p>
-    <app-like-button></app-like-button>
+    <app-like-button [isLiked]="isLiked" (likeClicked)="toggleLike()"></app-like-button>

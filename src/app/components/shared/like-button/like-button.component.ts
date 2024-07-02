@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-like-button',
@@ -9,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './like-button.component.css'
 })
 export class LikeButtonComponent {
-
+  @Input() isLiked=false;
+  @Output() likeClicked=new EventEmitter();
+  
 }

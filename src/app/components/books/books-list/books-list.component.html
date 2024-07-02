@@ -1,5 +1,5 @@
 <div class="books-container flex flex-wrap justify-center gap-x-5 g-4 mx-auto max-w-4xl mobile:p-5">
     <ng-container *ngFor="let book of booksList">
-        <app-book [isModalAvailable]="true" [book]="book" (titleClicked)="openModal($event)" class="book-wrapper bg-opacity-20 rounded-lg p-4 flex flex-col items-center shadow-md transition-transform transition-shadow w-full mb-5 desktop:w-calc-33p-40 tablet:w-calc-50p-40 hover:shadow-lg transition transform hover:-translate-y-1 relative" ></app-book>
+        <app-book [isModalAvailable]="true" [book]="book" [isLiked]="isBookLiked(book.id)" (titleClicked)="openModal($event)" class="book-wrapper bg-opacity-20 rounded-lg p-4 flex flex-col items-center shadow-md transition-transform transition-shadow w-full mb-5 desktop:w-calc-33p-40 tablet:w-calc-50p-40 hover:shadow-lg transition transform hover:-translate-y-1 relative" ></app-book>
     </ng-container>
 </div>
