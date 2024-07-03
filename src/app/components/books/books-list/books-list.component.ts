@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { BookComponent } from '../book/book.component';
 import { CommonModule } from '@angular/common';
 import { BookDetailsModalComponent } from '../book-details-modal/book-details-modal.component';
 import { StateService } from '../../../services/state.service';
-import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-books-list',
@@ -13,19 +12,27 @@ import { state } from '@angular/animations';
   styleUrl: './books-list.component.css'
 })
 export class BooksListComponent {
-  @Input() booksList:any=null;
+  @Input() booksList:any[]=[];
+  @Input() searchParam:string="";
   @Output() titleClick=new EventEmitter<any>;
   likedBooksList:number[]=[];
-  
+  filteredBooks:any[]=[];
+
   constructor(private stateService:StateService) {
   }
   openModal(data:any){
     this.titleClick.emit(data);
   }
   ngOnInit(){
+    this.filteredBooks=this.booksList;
     this.stateService.likedBooks$.subscribe(res=>{
       this.likedBooksList=res;
     })
+  }
+  ngOnChanges(changes:SimpleChanges){
+    if(changes['searchParam']){
+      this.filteredBooks=this.booksList.filter(s=>s.title.toLowerCase().includes(this.searchParam.toLowerCase()));
+    }
   }
 
   isBookLiked(id:any){

@@ -12,15 +12,21 @@ import { BookDetailsModalComponent } from '../book-details-modal/book-details-mo
   styleUrl: './books-home.component.css'
 })
 export class BooksHomeComponent {
+  @Input() books:any[]=[];
   selectedBook: any = null;
   isModalOpen = false;
-  @Input() books=null;
-  
+  searchParam='';
+
   openModal(data:any){
     this.selectedBook = data;
     this.isModalOpen = true;
   }
+
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  filterBooks(query:any){
+    this.searchParam=query;
   }
 }

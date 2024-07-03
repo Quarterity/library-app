@@ -1,1 +1,4 @@
-<input type="search" class="border border-gray-300 rounded-lg bg-white text-sm p-2 font-thin" placeholder="Search books.." aria-label="Search books">
+<div class="flex">
+    <input [formControl]="searchControl" (keydown.enter)="search()" class="border border-gray-300 rounded-lg bg-white text-sm p-2 font-thin" placeholder="Search books.." aria-label="Search books">
+    <button class="border border-black text-sm ml-1 rounded-lg p-2 hover:bg-black hover:text-white" (click)="search()">Submit</button>
+</div>
