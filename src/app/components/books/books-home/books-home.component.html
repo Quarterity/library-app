@@ -3,5 +3,5 @@
         <app-search (onSearch)="filterBooks($event)" class="search-section flex self-center"></app-search>
     </div>
 </div>
-<app-books-list [booksList]="books" [searchParam]="searchParam" (titleClick)="openModal($event)"></app-books-list>
-<app-book-details-modal  *ngIf="selectedBook!=null" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>
+<app-books-list [booksList]="books" [likedBooksList]="likedBooksList" [searchParam]="searchParam" (titleClick)="openModal($event)"></app-books-list>
+<app-book-details-modal  *ngIf="selectedBook!=null" [isBookLiked]="isBookLiked(selectedBook.id)" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>

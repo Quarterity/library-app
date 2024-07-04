@@ -13,17 +13,9 @@ import { StateService } from '../../../services/state.service';
 export class BookDetailsModalComponent {
   @Input() book:any;
   @Input() isOpen: boolean = false;
+  @Input() isBookLiked=false;
   @Output() close = new EventEmitter<void>();
-  isBookLiked=false;
-  constructor(private stateService:StateService) {
-  }
   closeModal() {
     this.close.emit();
   }
-  ngOnInit(){
-    this.stateService.likedBooks$.subscribe(res=>{
-      this.isBookLiked=res.includes(this.book.id);
-    })
-  }
-
 }

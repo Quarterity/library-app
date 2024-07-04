@@ -14,20 +14,15 @@ import { StateService } from '../../../services/state.service';
 export class BooksListComponent {
   @Input() booksList:any[]=[];
   @Input() searchParam:string="";
+  @Input() likedBooksList:number[]=[];
   @Output() titleClick=new EventEmitter<any>;
-  likedBooksList:number[]=[];
   filteredBooks:any[]=[];
 
-  constructor(private stateService:StateService) {
-  }
   openModal(data:any){
     this.titleClick.emit(data);
   }
   ngOnInit(){
     this.filteredBooks=this.booksList;
-    this.stateService.likedBooks$.subscribe(res=>{
-      this.likedBooksList=res;
-    })
   }
   ngOnChanges(changes:SimpleChanges){
     if(changes['searchParam']){
