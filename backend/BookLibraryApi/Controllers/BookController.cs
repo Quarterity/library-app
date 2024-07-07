@@ -35,4 +35,46 @@ public class BookController:ControllerBase
         
         return Ok(response);
     }
+    [HttpPost("{bookId}/comment")]
+    public async Task<ActionResult<Comment>> AddComment(int bookId, [FromBody] string comment)
+    {
+        if (comment == null || string.IsNullOrEmpty(comment))
+        {
+            return BadRequest("Comment text is required.");
+        }
+
+        var book = await _dbContext.Books.FindAsync(bookId);
+        if (book == null)
+        {
+            return NotFound("Book not found.");
+        }
+
+        Comment newComment=new Comment();
+        newComment.BookId = bookId;
+        newComment.Content=comment;
+        _dbContext.Comments.Add(newComment);
+        await _dbContext.SaveChangesAsync();
+        return Ok();
+    }
+    [HttpGet("comments/{id}")]
+    public async Task<ActionResult<Comment>> GetComment(int id)
+    {
+        var comment = await _dbContext.Comments.FindAsync(id);
+        if (comment == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(comment);
+    }
+    [HttpGet("{bookId}/comments")]
+    public async Task<ActionResult<IEnumerable<Comment>>> GetComments(int bookId)
+    {
+        var comments = await _dbContext.Comments
+            .Where(c => c.BookId == bookId)
+            .ToListAsync();
+
+        return Ok(comments);
+    }
+
 }

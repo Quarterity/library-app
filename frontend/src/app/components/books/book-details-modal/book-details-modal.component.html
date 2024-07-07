@@ -2,7 +2,15 @@
     <div class="bg-white rounded-lg p-4 max-w-md w-full relative p-8">
       <button class="absolute text-2xl top-1 right-3 text-gray-600 hover:text-gray-800 font" (click)="closeModal()">×</button>
       <app-book [book]="book" [isLiked]="isBookLiked"></app-book>
-      <p class="mb-2 mt-2">{{ book.description }}</p>
+      <p class="mb-2 mt-2 max-h-12 overflow-scroll">{{ book.description }}</p>
+      <input type="text" class="text-sm p-1 border border-black w-full content-start" placeholder="Insert comment.." [formControl]="commentControl">
+      <button (click)="addComment()" class="hover:bg-gray-500 hover:text-white border border-black w-full my-2">Add comment</button>
+      <div *ngIf="comments.length>0">Comments:</div>
+      <div class="h-12 overflow-scroll" >
+        <ng-container *ngFor="let comment of comments">
+          <div class="border-b border-black m-1 p-1">{{comment.content}}</div>
+        </ng-container>
+      </div>
     </div>
   </div>
   
