@@ -10,8 +10,8 @@ import { environment } from "../../environments/environment";
 export class BookService{
     constructor(private httpClient: HttpClient) { }
 
-    getBooks():Observable<any>{
-        return this.httpClient.get(environment.apiUrl+"/books").pipe(catchError(this.errorHandler));
+    getBooks(pageNumber:number, pageSize:number,searchParam:string=''):Observable<any>{
+        return this.httpClient.get(`${environment.apiUrl}/book?page=${pageNumber}&pageSize=${pageSize}&searchParam=${searchParam}`).pipe(catchError(this.errorHandler));
     }
     
     errorHandler(err:HttpErrorResponse) {

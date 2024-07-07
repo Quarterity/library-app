@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { BooksListComponent } from '../books-list/books-list.component';
 import { SearchComponent } from '../../shared/search/search.component';
 import { BookDetailsModalComponent } from '../book-details-modal/book-details-modal.component';
@@ -14,6 +14,11 @@ import { StateService } from '../../../services/state.service';
 })
 export class BooksHomeComponent {
   @Input() books:any[]=[];
+  @Input()totalPages:number=0;
+  @Input()currentPage:number=1;
+  @Output() pageChanged=new EventEmitter<any>;
+  @Output() searchInputChange=new EventEmitter<any>;
+
   selectedBook: any = null;
   isModalOpen = false;
   searchParam='';
@@ -29,14 +34,16 @@ export class BooksHomeComponent {
     this.selectedBook = data;
     this.isModalOpen = true;
   }
-  isBookLiked(id:any){
-    return this.likedBooksList.includes(id);
-  }
   closeModal() {
     this.isModalOpen = false;
   }
-
-  filterBooks(query:any){
-    this.searchParam=query;
+  isBookLiked(id:any){
+    return this.likedBooksList.includes(id);
+  }
+  searchBooks(query:any){
+    this.searchInputChange.emit(query);
+  }
+  onPageChange(page: number): void {
+    this.pageChanged.emit(page);
   }
 }

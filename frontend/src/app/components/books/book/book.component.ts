@@ -1,4 +1,4 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LikeButtonComponent } from '../../shared/like-button/like-button.component';
 import { StateService } from '../../../services/state.service';

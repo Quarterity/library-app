@@ -1,7 +1,7 @@
 <div class="books-header h-12 mb-1 flex justify-center">
     <div class="books-header-content flex justify-between pb-2">
-        <app-search (onSearch)="filterBooks($event)" class="search-section flex self-center"></app-search>
+        <app-search (onSearch)="searchBooks($event)" class="search-section flex self-center"></app-search>
     </div>
 </div>
-<app-books-list [booksList]="books" [likedBooksList]="likedBooksList" [searchParam]="searchParam" (titleClick)="openModal($event)"></app-books-list>
+<app-books-list [booksList]="books" [likedBooksList]="likedBooksList" [searchParam]="searchParam" [totalPages]="totalPages" [currentPage]="currentPage" (titleClick)="openModal($event)" (pageChanged)="onPageChange($event)"></app-books-list>
 <app-book-details-modal  *ngIf="selectedBook!=null" [isBookLiked]="isBookLiked(selectedBook.id)" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>

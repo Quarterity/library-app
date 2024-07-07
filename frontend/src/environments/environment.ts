@@ -1,6 +1,6 @@
 export const environment={
     production:false,
-    apiUrl:"https://freetestapi.com/api/v1",
+    apiUrl:"http://localhost:5009",
     localStorageKeys:{
         likedBooksKey:'likedBooks'
     }

@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { BookComponent } from '../book/book.component';
 import { CommonModule } from '@angular/common';
 import { BookDetailsModalComponent } from '../book-details-modal/book-details-modal.component';
-import { StateService } from '../../../services/state.service';
 
 @Component({
   selector: 'app-books-list',
@@ -15,22 +14,21 @@ export class BooksListComponent {
   @Input() booksList:any[]=[];
   @Input() searchParam:string="";
   @Input() likedBooksList:number[]=[];
+  @Input() totalPages:number=0;
+  @Input() currentPage:number=1;
+  @Output() pageChanged=new EventEmitter<any>;
   @Output() titleClick=new EventEmitter<any>;
-  filteredBooks:any[]=[];
 
   openModal(data:any){
     this.titleClick.emit(data);
   }
-  ngOnInit(){
-    this.filteredBooks=this.booksList;
-  }
-  ngOnChanges(changes:SimpleChanges){
-    if(changes['searchParam']){
-      this.filteredBooks=this.booksList.filter(s=>s.title.toLowerCase().includes(this.searchParam.toLowerCase()));
-    }
-  }
-
   isBookLiked(id:any){
     return this.likedBooksList.includes(id);
   }
+  onPageChange(page: number): void {
+    this.pageChanged.emit(page);
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    });  }
 }

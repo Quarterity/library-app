@@ -1,5 +1,5 @@
 <app-header></app-header>
 <div class="min-h-screen" >
-    <app-books-home [books]="booksData"></app-books-home>
+    <app-books-home [books]="booksData" [totalPages]="totalPages" [currentPage]="currentPage" (pageChanged)="onPageChange($event)" (searchInputChange)="onSearchInputChange($event)"></app-books-home>
 </div>
 <app-footer></app-footer>

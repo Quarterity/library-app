@@ -1,6 +1,13 @@
 <div class="books-container flex flex-wrap justify-center gap-x-5 g-4 mx-auto max-w-4xl mobile:p-5">
-    <ng-container *ngFor="let book of filteredBooks">
+    <ng-container *ngFor="let book of booksList">
         <app-book [isModalAvailable]="true" [book]="book" [isLiked]="isBookLiked(book.id)" (titleClicked)="openModal($event)" class="book-wrapper bg-opacity-20 rounded-lg p-4 flex flex-col items-center shadow-md transition-transform transition-shadow w-full mb-5 desktop:w-calc-33p-40 tablet:w-calc-50p-40 hover:shadow-lg transition transform hover:-translate-y-1 relative" ></app-book>
     </ng-container>
-    <div *ngIf="filteredBooks.length==0">There is no books to show...</div>
+    <div *ngIf="booksList.length==0">There is no books to show...</div>
+    <div class="nav-wrapper mt-10 flex h-12 w-full justify-center">
+        <div class="nav-content w-72 h-full flex justify-center">
+            <button *ngIf="currentPage-1>0" (click)="onPageChange(currentPage -1)" class="previous-btn text-sm w-18 h-12 p-2 flex items-center text-center border border-black">Previous</button>
+            <div class="w-12 h-12 flex items-center justify-center text-center">{{currentPage}}</div>
+            <button *ngIf="currentPage+1<=totalPages && totalPages!=1" (click)="onPageChange(currentPage + 1)" class="next-btn text-sm w-18 h-12 flex items-center justify-center text-center border border-black p-2">Next</button>
+        </div>
+    </div>
 </div>
