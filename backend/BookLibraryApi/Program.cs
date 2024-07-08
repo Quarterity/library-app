@@ -1,5 +1,10 @@
 using System.Text.Json.Serialization;
 using BookLibraryApi.Data;
+using BookLibraryApi.Data.Repositories;
+using BookLibraryApi.Interfaces.Repositories;
+using BookLibraryApi.Interfaces.Services;
+using BookLibraryApi.Models;
+using BookLibraryApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -17,6 +22,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<DbInitializer>();
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IBookService,BookService>();
 
 var app = builder.Build();
 
