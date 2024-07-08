@@ -19,7 +19,7 @@ public class BookController:ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks(int page = 1, int pageSize = 10, string searchParam = "" )
     {
-        var response = _bookService.GetBooksAsync(page, pageSize, searchParam);
+        var response = await _bookService.GetBooksAsync(page, pageSize, searchParam);
         
         return Ok(response);
     }
