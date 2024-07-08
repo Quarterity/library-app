@@ -4,4 +4,4 @@
     </div>
 </div>
 <app-books-list [booksList]="books" [likedBooksList]="likedBooksList" [searchParam]="searchParam" [totalPages]="totalPages" [currentPage]="currentPage" (titleClick)="openModal($event)" (pageChanged)="onPageChange($event)"></app-books-list>
-<app-book-details-modal  *ngIf="selectedBook!=null" [isBookLiked]="isBookLiked(selectedBook.id)" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>
+<app-book-details-modal  *ngIf="selectedBook!=null" [comments]="comments" (addedComment)="addComment($event)" [isBookLiked]="isBookLiked(selectedBook.id)" [book]="selectedBook" [isOpen]="isModalOpen" (close)="closeModal()"></app-book-details-modal>

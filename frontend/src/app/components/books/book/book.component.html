@@ -1,4 +1,4 @@
-    <div class="book-image-container w-full relative pt-120">
+    <div class="book-image-container w-full relative pt-60" [ngClass]="{'pt-120':isModalAvailable}">
         <img class="book-image absolute top-0 left-0 w-full h-full rounded-lg object-cover" [src]="book.picture" alt="Book cover of {{book.title}}" loading="lazy">
     </div>
     <h2 (click)="openModal(book)"  class="mt-3 text-sm text-center text-gray-700 font-thin" [ngClass]="{'cursor-pointer hover:underline':isModalAvailable}">{{book.title}}</h2>
