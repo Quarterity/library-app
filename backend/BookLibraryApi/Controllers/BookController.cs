@@ -8,12 +8,10 @@ namespace BookLibraryApi;
 [Route("[controller]")]
 public class BookController:ControllerBase
 {
-    private readonly LibraryDbContext _dbContext;
     private readonly IBookService _bookService;
 
-    public BookController(LibraryDbContext dbContext, IBookService bookService)
+    public BookController(IBookService bookService)
     {
-        _dbContext = dbContext;
         _bookService = bookService;
     }
     [HttpGet]
