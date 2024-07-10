@@ -5,6 +5,8 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { BooksHomeComponent } from '../books/books-home/books-home.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../services/book.service';
+import { LoadingService } from '../../services/loading.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -21,13 +23,17 @@ export class MainComponent implements OnInit {
   currentPage: any;
   pageSize:number=10;
   searchParam: string="";
-
-  constructor(private route:ActivatedRoute,private router: Router, private bookService: BookService) {
-    
+  loading$: Observable<boolean>;
+  error$: Observable<string|null>;
+  success$: Observable<string|null>;
+  constructor(private route:ActivatedRoute,private router: Router, private bookService: BookService, private loadingService:LoadingService) {
+    this.loading$=this.loadingService.loading$;
+    this.error$=this.loadingService.error$;
+    this.success$=this.loadingService.success$;
   }
   ngOnInit(): void {
     this.route.data.subscribe(data => {//save data returned from getbooks initial request of resolver
-      const response = data['books'].result;
+      const response = data['books'];
       this.booksData = response.books;
       this.booksCount = response.booksCount;
       this.totalPages = response.pagesCount;
@@ -43,10 +49,10 @@ export class MainComponent implements OnInit {
 
   private fetchBooks(): void {
     this.bookService.getBooks(this.currentPage, this.pageSize,this.searchParam).subscribe(response => {
-      this.booksData = response.result.books;
-      this.booksCount = response.result.booksCount;
-      this.totalPages = response.result.pagesCount;
-      this.currentPage = response.result.currentPage;      
+      this.booksData = response.books;
+      this.booksCount = response.booksCount;
+      this.totalPages = response.pagesCount;
+      this.currentPage = response.currentPage;      
     });
   } 
   onSearchInputChange(data:string){

@@ -1,4 +1,4 @@
-<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 p-8" *ngIf="isOpen">
+<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-8" *ngIf="isOpen">
     <div class="bg-white rounded-lg p-4 max-w-md w-full relative p-8">
       <button class="absolute text-2xl top-1 right-3 text-gray-600 hover:text-gray-800 font" (click)="closeModal()">×</button>
       <app-book [book]="book" [isLiked]="isBookLiked"></app-book>

@@ -245,3 +245,12 @@
 /Users/ajdin/Desktop/library-app/backend/BookLibraryApi/obj/Debug/net8.0/BookLibraryApi.pdb
 /Users/ajdin/Desktop/library-app/backend/BookLibraryApi/obj/Debug/net8.0/BookLibraryApi.genruntimeconfig.cache
 /Users/ajdin/Desktop/library-app/backend/BookLibraryApi/obj/Debug/net8.0/ref/BookLibraryApi.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.AspNetCore.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Extensions.Hosting.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Extensions.Logging.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Formatting.Compact.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Settings.Configuration.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Sinks.Console.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Sinks.Debug.dll
+/Users/ajdin/Desktop/library-app/backend/BookLibraryApi/bin/Debug/net8.0/Serilog.Sinks.File.dll

@@ -5,6 +5,7 @@ import { SearchComponent } from '../../shared/search/search.component';
 import { BookDetailsModalComponent } from '../book-details-modal/book-details-modal.component';
 import { StateService } from '../../../services/state.service';
 import { BookService } from '../../../services/book.service';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-books-home',
@@ -25,12 +26,12 @@ export class BooksHomeComponent {
   searchParam='';
   likedBooksList: number[]=[];
   comments: any[]=[];
-  constructor(private stateService:StateService, private bookService:BookService) {}
+  constructor(private stateService:StateService, private bookService:BookService, private loadingService:LoadingService) {}
 
   ngOnInit(){
     this.stateService.likedBooks$.subscribe(res=>{
       this.likedBooksList=res;
-    })
+    });
   }
   openModal(data:any){
     this.getComments(data.id);
@@ -56,6 +57,7 @@ export class BooksHomeComponent {
   }
   addComment(commentData:any){
     this.bookService.addComment(commentData.id,commentData.text).subscribe(res=>{
+      this.loadingService.showSuccess("Comment added succesfully");
       this.getComments(commentData.id);
     });
   }
