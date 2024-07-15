@@ -10,19 +10,14 @@ public class BookRepository:IBookRepository
     private readonly LibraryDbContext _dbContext;
     public BookRepository(LibraryDbContext dbContext)
     {
-        _dbContext = dbContext;
+        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
-    public async Task<IEnumerable<Book>> GetBooksAsync(int page = 1, int pageSize = 10, string searchParam = "")
+    public IQueryable<Book> GetBooksQueryBySearch(string searchParam = "")
     {
         try
         {
-            var books = await _dbContext.Books
-                .Where(s => string.IsNullOrEmpty(searchParam) || s.Title.Contains(searchParam))
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-        
-            return books;
+            return _dbContext.Books
+                .Where(s => string.IsNullOrEmpty(searchParam) || s.Title.Contains(searchParam));
         }
         catch (Exception ex)
         {
@@ -31,25 +26,11 @@ public class BookRepository:IBookRepository
         }
     }
 
-    public async Task<int> GetBooksCountAsync(string searchParam)
+    public async Task<Book> GetBookByIdAsync(int id,CancellationToken cancellationToken)
     {
         try
         {
-            return await _dbContext.Books.Where(s => string.IsNullOrEmpty(searchParam) || s.Title.Contains(searchParam)).CountAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Error retrieving booksCount with searchParam {searchParam}: {Message}", searchParam, ex.Message);
-            throw;
-        }
-    }
-    
-    
-    public async Task<Book> GetBookByIdAsync(int id)
-    {
-        try
-        {
-            var result= await _dbContext.Books.FindAsync(id);
+            var result= await _dbContext.Books.FindAsync(id,cancellationToken);//TODO: check 
             if (result == null)
             {
                 Log.Error( "Book is not found");
@@ -65,13 +46,13 @@ public class BookRepository:IBookRepository
         }
     }
 
-    public async Task<IEnumerable<Comment>> GetCommentsAsync(int bookId)
+    public async Task<IEnumerable<Comment>> GetCommentsAsync(int bookId,CancellationToken cancellationToken)
     {
         try
         {
             return await _dbContext.Comments
                 .Where(c => c.BookId == bookId)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
         catch (Exception ex)
         {
@@ -80,16 +61,16 @@ public class BookRepository:IBookRepository
         }
     }
 
-    public async Task<int?> AddComment(Comment comment)
+    public async Task<int> AddCommentAsync(Comment comment,CancellationToken cancellationToken)
     {
         try
         {
             _dbContext.Comments.Add(comment);
-            return await _dbContext.SaveChangesAsync();  
+            return await _dbContext.SaveChangesAsync(cancellationToken);  
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Error adding comment with  {comment}: {Message}", comment, ex.Message);
+            Log.Error(ex, "Error adding comment:  {comment}, {Message}", comment, ex.Message);
             throw;
         }  
     }

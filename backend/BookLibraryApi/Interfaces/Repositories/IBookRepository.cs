@@ -1,13 +1,13 @@
 using BookLibraryApi.Models;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace BookLibraryApi.Interfaces.Repositories;
 
 public interface IBookRepository
 {
-    Task<IEnumerable<Book>> GetBooksAsync(int page,int pageSize,string search);
-    Task<int> GetBooksCountAsync(string searchParam);
+    IQueryable<Book> GetBooksQueryBySearch(string search);
 
-    Task<Book> GetBookByIdAsync(int id);
-    Task<IEnumerable<Comment>> GetCommentsAsync(int bookId);
-    Task<int?> AddComment(Comment comment);
+    Task<Book> GetBookByIdAsync(int id,CancellationToken cancellationToken);
+    Task<IEnumerable<Comment>> GetCommentsAsync(int bookId,CancellationToken cancellationToken);
+    Task<int> AddCommentAsync(Comment comment,CancellationToken cancellationToken);
 }
